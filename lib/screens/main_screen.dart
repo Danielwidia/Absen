@@ -136,13 +136,17 @@ class HomeContent extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(25.0),
-              child: Text(
-                'Menu Utama',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[800],
-                ),
+              child: Row(
+                children: [
+                  Text(
+                    'Menu Utama',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -207,6 +211,8 @@ class HomeContent extends StatelessWidget {
   }
 
   Widget _buildMenuCard(BuildContext context, String title, IconData icon, Color color, Widget? destination) {
+    bool isComingSoon = destination == null;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -219,43 +225,79 @@ class HomeContent extends StatelessWidget {
           ),
         ],
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () {
-            if (destination != null) {
-              Navigator.push(context, MaterialPageRoute(builder: (_) => destination));
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Fitur $title segera hadir!')),
-              );
-            }
-          },
-          borderRadius: BorderRadius.circular(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
-                  shape: BoxShape.circle,
+      child: Stack(
+        children: [
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                if (!isComingSoon) {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => destination!));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Fitur $title segera hadir!'),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+              },
+              borderRadius: BorderRadius.circular(20),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: isComingSoon ? Colors.grey.withOpacity(0.1) : color.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        icon,
+                        color: isComingSoon ? Colors.grey : color,
+                        size: 30,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        title,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                          color: isComingSoon ? Colors.grey : Colors.black87,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                child: Icon(icon, color: color, size: 30),
               ),
-              const SizedBox(height: 12),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
-                  color: Colors.black87,
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          if (isComingSoon)
+            Positioned(
+              top: 10,
+              right: 10,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.orange.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Text(
+                  'Soon',
+                  style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
