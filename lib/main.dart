@@ -4,7 +4,20 @@ import 'package:managemant_sekolah/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'providers/auth_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart'; // Tambahkan ini
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Tambahkan inisialisasi Supabase
+  await Supabase.initialize(
+    url: 'https://yakhhfclrtlnecsotjsn.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlha2hoZmNscnRsbmVjc290anNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxNjMwMDYsImV4cCI6MjA5NDczOTAwNn0.Bm2LvepavgTmCQIce1XJPaTCq6PLX2m2HmdYbvBgLqY',
+  );
+
+  SharedPreferences? prefs = await SharedPreferences.getInstance();
+  // ... rest of code
+}
 void main() async {
   // 1. Pastikan Binding diinisialisasi
   WidgetsFlutterBinding.ensureInitialized();

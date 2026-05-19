@@ -34,16 +34,20 @@ class UserModel {
     };
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      id: map['id'],
-      username: map['username'],
-      fullName: map['full_name'],
-      role: UserRole.values.firstWhere((e) => e.toString().split('.').last == map['role']),
-      placeOfBirth: map['place_of_birth'],
-      dateOfBirth: map['date_of_birth'] != null ? DateTime.parse(map['date_of_birth']) : null,
-      address: map['address'],
-      hasFaceRegistered: map['has_face_registered'] ?? false,
-    );
-  }
+factory UserModel.fromMap(Map<String, dynamic> map) {
+  return UserModel(
+    id: map['id'].toString(),
+    username: map['username'],
+    fullName: map['full_name'],
+    // Tambahkan mapping jika nama di DB berbeda dengan nama di Enum
+    role: UserRole.values.firstWhere(
+      (e) {
+        String roleInDb = map['role'].toString().toLowerCase();
+        if (roleInDb == 'guru') roleInDb = 'teacher'; // Mapping manual
+        return e.toString().split('.').last == roleInDb;
+      },
+      orElse: () => UserRole.student,
+    ),
+    // ... rest of fields
+  );
 }

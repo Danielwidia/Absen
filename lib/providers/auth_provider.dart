@@ -1,6 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+// ... di dalam class AuthProvider
+final _supabase = Supabase.instance.client;
+
+Future<bool> login(String username, String password) async {
+  try {
+    // 1. Ambil data user berdasarkan username dari tabel Supabase
+    final response = await _supabase
+        .from('users') // Pastikan nama tabel sesuai di Supabase
+        .select()
+        .eq('username', username)
+        .eq('password', password) // Catatan: Sebaiknya gunakan Auth Supabase, bukan simpan password plain
+        .maybeSingle();
+
+    if (response != null) {
+      // 2. Map data dari Supabase ke UserModel
+      _user = UserModel.fromMap(response);
+
+      // Simpan status login jika perlu
+      if (_rememberMe && prefs != null) {
+        await prefs!.setString('saved_username', username);
+      }
+
+      notifyListeners();
+      return true;
+    }
+    return false;
+  } catch (e) {
+    debugPrint('Login Error: $e');
+    return false;
+  }
+}
+
+// Tambahkan juga fungsi register yang dipanggil di RegisterScreen
+Future<bool> register(UserModel user, String password) async {
+  try {
+    await _supabase.from('users').insert({
+      'username': user.username,
+      'password': password,
+      'full_name': user.fullName,
+      'role': user.role.toString().split('.').last,
+      'place_of_birth': user.placeOfBirth,
+      'date_of_birth': user.dateOfBirth?.toIso8601String(),
+      'address': user.address,
+      'has_face_registered': user.hasFaceRegistered,
+    });
+    return true;
+  } catch (e) {
+    debugPrint('Register Error: $e');
+    return false;
+  }
+}
 
 class AuthProvider with ChangeNotifier {
   final SharedPreferences? prefs;
