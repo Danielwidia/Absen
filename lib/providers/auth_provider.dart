@@ -3,39 +3,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
 
 class AuthProvider with ChangeNotifier {
+  final SharedPreferences? prefs;
   UserModel? _user;
   bool _rememberMe = false;
 
   UserModel? get user => _user;
   bool get rememberMe => _rememberMe;
 
-  AuthProvider() {
+  AuthProvider({this.prefs}) {
     _loadRememberMe();
   }
 
-  Future<void> _loadRememberMe() async {
-    final prefs = await SharedPreferences.getInstance();
-    _rememberMe = prefs.getBool('remember_me') ?? false;
-    notifyListeners();
+  void _loadRememberMe() {
+    if (prefs != null) {
+      _rememberMe = prefs!.getBool('remember_me') ?? false;
+      notifyListeners();
+    }
   }
 
   Future<void> setRememberMe(bool value) async {
     _rememberMe = value;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('remember_me', value);
+    if (prefs != null) {
+      await prefs!.setBool('remember_me', value);
+    }
     notifyListeners();
-  }
-
-  Future<bool> register(UserModel newUser, String password) async {
-    // In a real app, save to Supabase
-    // For now, simulate success
-    _user = newUser;
-    notifyListeners();
-    return true;
   }
 
   Future<bool> login(String username, String password) async {
-    // Default Admin
+    // Simulasi Login
     if (username == 'ADM' && password == 'admin321') {
       _user = UserModel(
         id: 'admin_1',
@@ -48,10 +43,9 @@ class AuthProvider with ChangeNotifier {
       return true;
     }
 
-    // Mock logic for demo
     if (username.isNotEmpty && password.length >= 6) {
       _user = UserModel(
-        id: 'user_${DateTime.now().millisecondsSinceEpoch}',
+        id: 'user_123',
         username: username,
         fullName: 'User $username',
         role: UserRole.student,
@@ -60,7 +54,6 @@ class AuthProvider with ChangeNotifier {
       notifyListeners();
       return true;
     }
-
     return false;
   }
 
