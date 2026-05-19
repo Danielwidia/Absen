@@ -1,16 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'package:local_auth/local_auth.dart';
-// Hapus import platform-specific yang menyebabkan error di Web
 
 class BiometricService {
-  final LocalAuthentication auth = LocalAuthentication();
+  // Gunakan late agar tidak langsung diinisialisasi di Web untuk menghindari crash
+  late final LocalAuthentication auth;
+
+  BiometricService() {
+    if (!kIsWeb) {
+      auth = LocalAuthentication();
+    }
+  }
 
   Future<bool> authenticate() async {
-    // Di Web, biometrik biasanya tidak didukung melalui local_auth secara langsung
-    // atau membutuhkan konfigurasi HTTPS yang sangat ketat.
+    // Di Web, local_auth tidak didukung secara native, kembalikan true untuk simulasi
     if (kIsWeb) {
-      debugPrint('Biometric authentication is not fully supported on Web. Skipping...');
-      return true; // Berikan akses atau ganti dengan password check
+      debugPrint('Biometric authentication is not supported on Web. Simulating success...');
+      return true;
     }
 
     try {
@@ -25,7 +30,6 @@ class BiometricService {
           stickyAuth: true,
           biometricOnly: true,
         ),
-        // Gunakan pesan default yang aman untuk semua platform
       );
     } catch (e) {
       debugPrint('Error during biometric auth: $e');
