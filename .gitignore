@@ -1,0 +1,56 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch.json and tasks.json which tell VS Code how
+# to run your project. You may want to contribute this to your project, so
+# people other than you can use them to run your project.
+# However, for a project with many contributors, it's common to ignore them.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/Ephemeral/
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/Flutter.podspec
+**/ios/ServiceDefinitions.json
+**/android/key.properties
+**/android/app/local.properties
+**/android/app/stacktrace
+**/android/app/src/main/res/values/strings.xml
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Symbolized stack traces
+tombstones/
+
+# Why are crash dumps included? In case one of your users experiences a crash
+# and sends you the dump.
+apk_elapsed_time.txt
+flutter_*.png
+flutter_*.debug
+flutter_*.release
+
+# Secrets
+.env

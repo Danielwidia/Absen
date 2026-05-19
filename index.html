@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Management - Sekolah Kristen Dorkas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1E3A8A 0%, #1e40af 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <i class="fas fa-school text-blue-900 text-2xl mr-2"></i>
+                    <span class="font-bold text-xl text-blue-900 tracking-tight">DORKAS SYSTEM</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="hover:text-blue-700 font-medium">Fitur</a>
+                    <a href="#access" class="hover:text-blue-700 font-medium">Akses Portal</a>
+                    <a href="https://github.com/YOUR_USERNAME/managemant_sekolah/raw/main/app-release.apk" class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition">Download APK</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient pt-32 pb-20 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6">Manageman Sekolah Kristen Dorkas</h1>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+                Sistem informasi terintegrasi untuk Guru, Siswa, dan Admin dalam satu platform mobile dan web yang modern.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#access" class="bg-white text-blue-900 px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-50 transition">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Masuk ke Portal
+                </a>
+                <a href="https://github.com/YOUR_USERNAME/managemant_sekolah" target="_blank" class="bg-blue-700 text-white border border-blue-400 px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-600 transition">
+                    <i class="fab fa-github mr-2"></i> Lihat di GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portal Access -->
+    <section id="access" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-blue-900">Akses Cepat Portal</h2>
+                <p class="text-gray-600 mt-2">Pilih peran Anda untuk masuk ke sistem melalui Browser</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Admin -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-red-600 hover:transform hover:-translate-y-2 transition duration-300">
+                    <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-user-shield text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Portal Admin</h3>
+                    <p class="text-gray-600 mb-6">Kelola akun, jadwal ujian, dan download laporan absensi secara global.</p>
+                    <button onclick="goToApp()" class="w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700">Akses Admin</button>
+                </div>
+
+                <!-- Guru -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-blue-600 hover:transform hover:-translate-y-2 transition duration-300">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-chalkboard-teacher text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Portal Guru</h3>
+                    <p class="text-gray-600 mb-6">Managemen soal online, input nilai, dan generate soal berbasis AI.</p>
+                    <button onclick="goToApp()" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700">Akses Guru</button>
+                </div>
+
+                <!-- Siswa -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-green-600 hover:transform hover:-translate-y-2 transition duration-300">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-user-graduate text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Portal Siswa</h3>
+                    <p class="text-gray-600 mb-6">Lihat jadwal kelas, kerjakan soal online, dan akses materi pembelajaran.</p>
+                    <button onclick="goToApp()" class="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700">Akses Siswa</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="mb-4 text-white font-bold">Sekolah Kristen Dorkas</p>
+            <p>© 2024. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </footer>
+
+    <script>
+        function goToApp() {
+            // Mengarahkan ke subfolder 'app' tempat Flutter Web berada
+            // Pastikan Anda sudah menjalankan 'flutter build web' dan meletakkan hasilnya di folder /app
+            window.location.href = './app/index.html';
+        }
+    </script>
+</body>
+</html>

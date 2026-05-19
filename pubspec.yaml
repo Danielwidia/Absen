@@ -1,0 +1,32 @@
+name: managemant_sekolah
+description: A new Flutter project for Sekolah Kristen Dorkas.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  supabase_flutter: ^2.0.0
+  provider: ^6.1.1
+  geolocator: ^10.1.0
+  local_auth: ^2.1.6
+  intl: ^0.19.0
+  http: ^1.1.0
+  shared_preferences: ^2.2.2
+  google_fonts: ^6.1.0
+  url_launcher: ^6.2.1
+  camera: ^0.10.5+5
+  path_provider: ^2.1.1
+  path: ^1.8.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
